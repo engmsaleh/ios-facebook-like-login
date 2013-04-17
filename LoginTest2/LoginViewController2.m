@@ -9,10 +9,8 @@
 #import "LoginViewController2.h"
 
 @interface LoginViewController2 () <UITableViewDataSource,UITableViewDelegate>
-@property (weak, nonatomic) IBOutlet UILabel *lbl;
 @property (weak, nonatomic) IBOutlet UITableView *loginTable;
 @property (weak, nonatomic) IBOutlet UIImageView *tmrkLogoLabel;
-@property (weak, nonatomic) IBOutlet UITableView *enterButton;
 
 @end
 
@@ -63,7 +61,6 @@
     
     
     NSLog(@"self.view.center.y %f",self.view.bounds.origin.x);
-    NSLog(@"%f",self.lbl.frame.size.height);
     NSLog(@"self.view.center.x %f",self.view.center.x);
 //    CGPoint point = CGPointMake(1, 1);
 //    [self.tmrkLogoLabel convertPoint:point fromView:nil];
@@ -81,12 +78,6 @@
 //    self.loginTable.center=centerPoint;
 //    self.loginTable.frame=viewRect;
 //    self.tmrkLogoLabel.frame = viewRect;
-    
-    CGRect viewRect = CGRectMake(self.tmrkLogoLabel.frame.origin.x,
-                                  self.tmrkLogoLabel.frame.origin.y-1,
-                                  self.tmrkLogoLabel.frame.size.width,
-                                  self.tmrkLogoLabel.frame.size.height);
-    
     CGRect viewRect2 = CGRectMake(self.tmrkLogoLabel.frame.origin.x,
                                   self.tmrkLogoLabel.frame.origin.y-150,
                                   self.tmrkLogoLabel.frame.size.width,
@@ -94,28 +85,21 @@
 
 //    self.loginTable.center= self.view.center;
     //Make sure not to set your storyboard layout to autolayout
-    [UIView animateWithDuration:1
-                    animations:^{  // animate the following:
-                        self.tmrkLogoLabel.frame = viewRect;
-//                        [self.loginTable setAlpha:1];
-//                        [self.view layoutIfNeeded];
+    UIViewAnimationOptions opts = UIViewAnimationOptionCurveEaseInOut ;
+    [UIView animateWithDuration:0.7
+            delay:1.0
+            options:opts
+            animations:^{
+                        self.tmrkLogoLabel.frame = viewRect2; // move to new
+                        [self.view layoutIfNeeded];
                     }
-                     completion:^(BOOL finished){
-                         [UIView animateWithDuration:1.2
-                                          animations:^{  // animate the following:
-                                              self.tmrkLogoLabel.frame = viewRect2; // move to new
-                                              [self.view layoutIfNeeded];
-                                              
-                                          }
-                                          completion:^(BOOL finished){
-//                                              [UIView l
-                                              [UIView animateWithDuration:.5 animations:^{
-                                                  [self.loginTable setAlpha:1.0];
-                                                  [self.view layoutIfNeeded];
-                                              }];
-                                          }];
+            completion:^(BOOL finished){
+                [UIView animateWithDuration:.5 animations:^{
+                             [self.loginTable setAlpha:1.0];
+                             [self.view layoutIfNeeded];
+
                      }];
-//     ];
+            }];
 //
     }
 
